@@ -187,7 +187,7 @@ class YOLONet(object):
             tf.losses.add_loss(object_loss)
             tf.losses.add_loss(noobject_loss)
             tf.losses.add_loss(coord_loss)
-
+            #"""
             tf.summary.scalar('class_loss', class_loss)
             tf.summary.scalar('object_loss', object_loss)
             tf.summary.scalar('noobject_loss', noobject_loss)
@@ -198,7 +198,7 @@ class YOLONet(object):
             tf.summary.histogram('boxes_delta_w', boxes_delta[:, :, :, :, 2])
             tf.summary.histogram('boxes_delta_h', boxes_delta[:, :, :, :, 3])
             tf.summary.histogram('iou', iou_predict_truth)
-
+            #"""
 
 def leaky_relu(alpha):
     def op(inputs):

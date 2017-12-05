@@ -2,10 +2,10 @@ import tensorflow as tf
 import datetime
 import os
 import argparse
-import yolo.config as cfg
+import yolo.config2 as cfg
 from yolo.yolo_net import YOLONet
 from utils.timer import Timer
-from utils.pascal_voc import pascal_voc
+from utils.pascal_voc2 import pascal_voc
 
 
 class Solver(object):
@@ -128,7 +128,7 @@ def update_config_paths(data_dir, weights_file):
     cfg.DATA_PATH = data_dir
     cfg.WEIGHTS_DIR = os.path.join(cfg.DATA_PATH, 'weights')
     cfg.WEIGHTS_FILE = os.path.join(cfg.WEIGHTS_DIR, weights_file)
-    cfg.PASCAL_PATH = os.path.join(data_dir, 'pascal_voc')
+    cfg.PASCAL_PATH = os.path.join(data_dir, 'slab')
     cfg.CACHE_PATH = os.path.join(cfg.PASCAL_PATH, 'cache')
     cfg.OUTPUT_DIR = os.path.join(cfg.PASCAL_PATH, 'output')
 
@@ -149,7 +149,7 @@ def main():
     if args.data_dir != cfg.DATA_PATH:
         update_config_paths(args.data_dir, args.weights)
 
-    #os.environ['CUDA_VISIBLE_DEVICES'] = cfg.GPU
+    os.environ['CUDA_VISIBLE_DEVICES'] = cfg.GPU
 
     yolo = YOLONet()
     pascal = pascal_voc('train')

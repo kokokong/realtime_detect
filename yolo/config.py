@@ -4,7 +4,7 @@ import os
 # path and dataset parameter
 #
 
-DATA_PATH = 'data'
+DATA_PATH = './data'
 
 PASCAL_PATH = os.path.join(DATA_PATH, 'pascal_voc')
 
@@ -12,9 +12,9 @@ CACHE_PATH = os.path.join(PASCAL_PATH, 'cache')
 
 OUTPUT_DIR = os.path.join(PASCAL_PATH, 'output')
 
-WEIGHTS_DIR = os.path.join(PASCAL_PATH, 'weight')
+WEIGHTS_DIR = os.path.join(DATA_PATH, 'weights')
 
-WEIGHTS_FILE = None
+WEIGHTS_FILE = "YOLO_small.ckpt"
 # WEIGHTS_FILE = os.path.join(DATA_PATH, 'weights', 'YOLO_small.ckpt')
 
 CLASSES = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
@@ -49,7 +49,7 @@ COORD_SCALE = 5.0
 # solver parameter
 #
 
-GPU = ''
+GPU = '0'
 
 LEARNING_RATE = 0.0001
 
@@ -59,7 +59,7 @@ DECAY_RATE = 0.1
 
 STAIRCASE = True
 
-BATCH_SIZE = 45
+BATCH_SIZE = 3
 
 MAX_ITER = 15000
 

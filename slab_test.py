@@ -3,7 +3,7 @@ import numpy as np
 import os
 import cv2
 import argparse
-import yolo.config as cfg
+import yolo.config2 as cfg
 from yolo.yolo_net import YOLONet
 from utils.timer import Timer
 
@@ -41,7 +41,7 @@ class Detector(object):
             cv2.rectangle(img, (x - w, y - h - 20),
                           (x + w, y - h), (125, 125, 125), -1)
             cv2.putText(img, result[i][0] + ' : %.2f' % result[i][5], (x - w + 5, y - h - 7), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.CV_AA)
-
+            cv2.imshow("img",img)
     def detect(self, img):
         img_h, img_w, _ = img.shape
         inputs = cv2.resize(img, (self.image_size, self.image_size))
@@ -56,7 +56,7 @@ class Detector(object):
             result[i][2] *= (1.0 * img_h / self.image_size)
             result[i][3] *= (1.0 * img_w / self.image_size)
             result[i][4] *= (1.0 * img_h / self.image_size)
-
+        print(result)
         return result
 
     def detect_from_cvmat(self, inputs):
@@ -65,7 +65,8 @@ class Detector(object):
         results = []
         for i in range(net_output.shape[0]):
             results.append(self.interpret_output(net_output[i]))
-
+        print("de_cv")
+        print(results)
         return results
 
     def interpret_output(self, output):
@@ -161,11 +162,11 @@ class Detector(object):
         self.draw_result(image, result)
         cv2.imshow('Image', image)
         cv2.waitKey(wait)
-
+        cv2.imwrite("result.png", image)
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', default="YOLO_small.ckpt", type=str)
+    parser.add_argument('--weights', default="save.ckpt-15000", type=str)
     parser.add_argument('--weight_dir', default='weights', type=str)
     parser.add_argument('--data_dir', default="data", type=str)
     parser.add_argument('--gpu', default='', type=str)
@@ -182,7 +183,7 @@ def main():
     # detector.camera_detector(cap)
 
     # detect from image file
-    imname = 'test/cat.jpg'
+    imname = './test/21.jpg'
     detector.image_detector(imname)
 
 
